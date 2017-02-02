@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- req'd by bootstrap -->
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href="http//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"> -->
+        <link rel="stylesheet" href="{{ url_for('static',filename='css/bootstrap.min.css')}}">
+        <!-- standard metatags -->
+
+        <meta charset="utf-8">
+        <meta name="description" content="Full Friends CRUD">
+        <meta name="keywords" content="python, flask">
+        <meta name="author" content="David Cannady">
+        <title>List Friends</title>
+
+        <!-- jQuery and Bootstrap -->
+
+        <script type="text/javascript" src="{{ url_for('static',filename='js/jquery-2.2.3.min.js')}}"</script>
+    </head>
+    <body>
+      {% with messages = get_flashed_messages()}
+        {% if messages %}
+        {% for messages in messages %}
+        <p class="{{session['view']}}">{{message}}</p>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+        <div class="container-fluid">
+          <div class="row responsive-table">
+            <table class="table table-hover table-striped table-condensed">
+              <caption class="h1">List of Friends</caption>
+              <tr>
+                <th></th>
+                <th>ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Occupation</th>
+              </tr>
+              {% for friend in all_friends %}
+                <tr>
+                  <td>{{ friend['id']}}</td>
+                  <td>{{friend[first_name]}}</td>
+                  <td>{{friend[last_name]}}</td>
+                  <td>{{friend[occupation]}}</td>
+                </tr>
+              {% endfor %}
+            </table>
+            <a href="/create"><button class="btn btn-md">Create New Friend</button></a>
+          </div>
+        </div>
+      </body>
+    </html>
+    
